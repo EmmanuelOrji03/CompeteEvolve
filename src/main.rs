@@ -4,6 +4,7 @@ mod metaprompt;
 
 use agent::{Agent, SharedTools};
 use agent::database::Connection;
+use std::collections::HashMap;
 use std::env;
 use std::io::{self, Write};
 use std::sync::Arc;
@@ -28,6 +29,7 @@ async fn main() -> anyhow::Result<()> {
 
     let shared = SharedTools {
         db: Arc::new(Mutex::new(Connection::new())),
+        agent_evaluations: Arc::new(Mutex::new(HashMap::new())), 
     };
 
     let mut agents: Vec<Agent> = (0..num_agents)
