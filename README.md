@@ -10,8 +10,11 @@ and reports quality and wall time, and the agents are ranked on their best
 valid candidate. The top half earn a reward, everyone sees the leaderboard and
 the best rival's code, and the next round begins.
 
-See [ROADMAP.md](ROADMAP.md) for the state of the project, what was wrong with
-the first draft, and what is still to do.
+Documentation:
+
+- [docs/RUNNING.md](docs/RUNNING.md): setup, commands, output files, configuration, troubleshooting.
+- [docs/RESULTS.md](docs/RESULTS.md): measured baselines and every live run, with the exact commands.
+- [ROADMAP.md](ROADMAP.md): what the first draft did, what was wrong with it, and what is still to do.
 
 ## Layout
 
