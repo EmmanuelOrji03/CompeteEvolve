@@ -1,11 +1,18 @@
 # Rust build artifacts
 /target/
-Cargo.lock  # remove this line if you're building a binary/application (keep it for apps, ignore for libraries)
 
 # Environment variables
 .env
 .env.local
 .env.*.local
+
+# Run artifacts (archives, logs, generated candidates)
+/runs/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
 
 # IDE / editor
 .vscode/
