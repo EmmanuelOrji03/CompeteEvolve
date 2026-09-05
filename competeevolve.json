@@ -1,0 +1,32 @@
+{
+  "agents": 3,
+  "rounds": 3,
+  "samples_per_evolve": 3,
+  "max_tool_calls_per_round": 5,
+  "mu_threshold": 0.7,
+  "seed_parent_probability": 0.2,
+  "novelty_reject_threshold": 0.98,
+  "context_max_chars": 12000,
+  "fitness": {
+    "quality_exponent": 4.0,
+    "speed_exponent": 1.0,
+    "novelty_weight": 0.5,
+    "quality_tolerance": 0.01
+  },
+  "harness": {
+    "python": "python",
+    "script": "harness/evaluate.py",
+    "folds": 3,
+    "repeats": 2,
+    "seed": 0,
+    "timeout_seconds": 180
+  },
+  "gemini": {
+    "agent_model": "gemini-3.7-flash",
+    "generation_model": "gemini-3.7-flash",
+    "requests_per_minute": 8,
+    "max_retries": 6,
+    "temperature": 0.9,
+    "request_timeout_seconds": 120
+  }
+}

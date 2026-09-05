@@ -1,64 +1,76 @@
 mod agent;
-mod context;
-mod metaprompt;
+mod archive;
+mod config;
+mod evolution;
+mod fitness;
+mod gemini;
+mod harness;
+mod orchestrator;
+mod prompts;
 
-use agent::{Agent, SharedTools};
-use agent::database::Connection;
-use std::collections::HashMap;
-use std::env;
+use anyhow::Result;
 use std::io::{self, Write};
-use std::sync::Arc;
-use tokio::sync::Mutex;
+
+use config::{Cli, Config, USAGE};
+use harness::Harness;
+use orchestrator::RunOptions;
 
 #[tokio::main]
-async fn main() -> anyhow::Result<()> {
+async fn main() -> Result<()> {
     dotenvy::dotenv().ok();
 
-    let api_key = env::var("GEMINI_API_KEY")?;
-
-    // Let the user pick which markdown file to feed in as context.
-    let context = context::choose_markdown_file("context")?;
-
-    let refined_prompt = metaprompt::run_metaprompt(&context).await?;
-    println!("The meta prompt is ready: {}", refined_prompt);
-
-    let num_agents = match env::args().nth(1) {
-        Some(arg) => arg.parse::<usize>()?,
-        None => read_agent_count(),
-    };
-
-    let shared = SharedTools {
-        db: Arc::new(Mutex::new(Connection::new())),
-        agent_evaluations: Arc::new(Mutex::new(HashMap::new())), 
-    };
-
-    let mut agents: Vec<Agent> = (0..num_agents)
-        .map(|i| {
-            let name = format!("agent-{}", i + 1);
-            Agent::new(name, api_key.clone(), shared.clone())
-        })
-        .collect();
-
-    let handles = agents
-        .iter_mut()
-        .map(|agent| agent.send_owned(refined_prompt.clone()));
-
-    let results = futures::future::join_all(handles).await;
-
-    for (agent, result) in agents.iter().zip(results) {
-        match result {
-            Ok(reply) => println!("{}: {}", agent.name, reply),
-            Err(e) => println!("{}: error - {e}", agent.name),
-        }
+    let cli = Cli::parse(std::env::args().skip(1))?;
+    if cli.help {
+        print!("{USAGE}");
+        return Ok(());
     }
 
-    Ok(())
-}
+    let mut cfg = Config::load(cli.config.as_deref())?;
+    cli.apply(&mut cfg);
 
-fn read_agent_count() -> usize {
-    print!("How many agents? ");
-    io::stdout().flush().unwrap();
-    let mut input = String::new();
-    io::stdin().read_line(&mut input).unwrap();
-    input.trim().parse().unwrap_or(1)
+    let harness = Harness::new(&cfg.harness)?;
+    let tasks = harness.list_tasks().await?;
+
+    if cli.list_tasks {
+        for t in &tasks {
+            println!("{:<22} {:<15} {}", t.task, t.kind, t.description);
+        }
+        return Ok(());
+    }
+
+    let task = match cli.task.clone() {
+        Some(t) => t,
+        None => {
+            println!("Select a task:");
+            for (i, t) in tasks.iter().enumerate() {
+                println!("  {}) {:<22} {}", i + 1, t.task, t.description);
+            }
+            print!("> ");
+            io::stdout().flush()?;
+            let mut input = String::new();
+            io::stdin().read_line(&mut input)?;
+            let idx: usize = input.trim().parse().unwrap_or(1);
+            tasks
+                .get(idx.saturating_sub(1))
+                .map(|t| t.task.clone())
+                .unwrap_or_else(|| tasks[0].task.clone())
+        }
+    };
+
+    let api_key = std::env::var("GEMINI_API_KEY")
+        .ok()
+        .filter(|k| !k.trim().is_empty());
+
+    orchestrator::run(
+        cfg,
+        api_key,
+        RunOptions {
+            task,
+            goal: cli.goal,
+            context_file: cli.context_file,
+            run_id: cli.run_id,
+            baseline_only: cli.baseline_only,
+        },
+    )
+    .await
 }
