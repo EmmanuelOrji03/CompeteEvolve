@@ -1,0 +1,256 @@
+{
+  "baseline": {
+    "quality": 0.952605219825846,
+    "result": {
+      "code_length": 1882,
+      "fit_time": 0.11257337499998243,
+      "n_folds_ok": 24,
+      "n_folds_total": 24,
+      "per_dataset": [
+        {
+          "fit_time": 0.028497700000002624,
+          "n_ok": 6,
+          "n_total": 6,
+          "name": "iris",
+          "predict_time": 0.00002779999999802385,
+          "quality": 0.8966666666666665
+        },
+        {
+          "fit_time": 0.03766904999997678,
+          "n_ok": 6,
+          "n_total": 6,
+          "name": "wine",
+          "predict_time": 0.000030200000082913903,
+          "quality": 0.9887476459510358
+        },
+        {
+          "fit_time": 0.026979250000067623,
+          "n_ok": 6,
+          "n_total": 6,
+          "name": "breast_cancer",
+          "predict_time": 0.000040949999970507633,
+          "quality": 0.9745335561125036
+        },
+        {
+          "fit_time": 0.3571474999998827,
+          "n_ok": 6,
+          "n_total": 6,
+          "name": "digits",
+          "predict_time": 0.0001409999999850697,
+          "quality": 0.9504730105731776
+        }
+      ],
+      "predict_time": 0.00005998750000912878,
+      "quality": 0.952605219825846,
+      "quality_std": 0.042479323978076605,
+      "runtime_errors": [],
+      "status": "ok",
+      "syntax_error": null
+    },
+    "time": 0.11263336249999156
+  },
+  "best": {
+    "agent": "agent-1",
+    "errors": [],
+    "fit_time": 0.00825,
+    "folds_ok": "24/24",
+    "id": "agent-1-r1-c005",
+    "novelty": 0.1759,
+    "operator": "manual",
+    "parents": [
+      "agent"
+    ],
+    "performance": 14.6119,
+    "predict_time": 0.00005,
+    "quality": 0.9703,
+    "quality_std": 0.0147,
+    "round": 1,
+    "score": 0.5503,
+    "status": "ok",
+    "valid": true
+  },
+  "candidates": 7,
+  "improvement": {
+    "best_file": "runs\\live-smoke-1\\best.py",
+    "performance": 14.6119,
+    "quality_delta": 0.0177,
+    "speedup": 13.5758
+  },
+  "llm_calls": 14,
+  "rejected_invalid_shape": 0,
+  "rejected_near_duplicates": 1,
+  "rounds_completed": 1,
+  "run_id": "live-smoke-1",
+  "sklearn_reference": {
+    "code_length": 0,
+    "fit_time": 0.017927187499964248,
+    "n_folds_ok": 24,
+    "n_folds_total": 24,
+    "per_dataset": [
+      {
+        "fit_time": 0.010553249999929903,
+        "n_ok": 6,
+        "n_total": 6,
+        "name": "iris",
+        "predict_time": 0.0003480499999568565,
+        "quality": 0.9533333333333333
+      },
+      {
+        "fit_time": 0.015533699999991768,
+        "n_ok": 6,
+        "n_total": 6,
+        "name": "wine",
+        "predict_time": 0.0003723500000205604,
+        "quality": 0.9803201506591338
+      },
+      {
+        "fit_time": 0.009224099999983082,
+        "n_ok": 6,
+        "n_total": 6,
+        "name": "breast_cancer",
+        "predict_time": 0.0002699000000347951,
+        "quality": 0.9736470806646244
+      },
+      {
+        "fit_time": 0.03639769999995224,
+        "n_ok": 6,
+        "n_total": 6,
+        "name": "digits",
+        "predict_time": 0.0003152000000454791,
+        "quality": 0.9682804674457428
+      }
+    ],
+    "predict_time": 0.00032637500001442277,
+    "quality": 0.9688952580257086,
+    "quality_std": 0.018794403149550738,
+    "runtime_errors": [],
+    "status": "ok",
+    "syntax_error": null
+  },
+  "standings": [
+    {
+      "agent": "agent-1",
+      "best_id": "agent-1-r1-c005",
+      "best_performance": 14.611920182566646,
+      "best_score": 0.5502901174495345,
+      "candidates": 4,
+      "rank_position": 1,
+      "reward": 1,
+      "valid_candidates": 4
+    },
+    {
+      "agent": "agent-2",
+      "best_id": "agent-2-r1-c004",
+      "best_performance": 8.498509995008328,
+      "best_score": 0.516383619070547,
+      "candidates": 3,
+      "rank_position": 2,
+      "reward": 0,
+      "valid_candidates": 3
+    }
+  ],
+  "task": "logistic_regression",
+  "top_5": [
+    {
+      "agent": "agent-1",
+      "errors": [],
+      "fit_time": 0.00825,
+      "folds_ok": "24/24",
+      "id": "agent-1-r1-c005",
+      "novelty": 0.1759,
+      "operator": "manual",
+      "parents": [
+        "agent"
+      ],
+      "performance": 14.6119,
+      "predict_time": 0.00005,
+      "quality": 0.9703,
+      "quality_std": 0.0147,
+      "round": 1,
+      "score": 0.5503,
+      "status": "ok",
+      "valid": true
+    },
+    {
+      "agent": "agent-1",
+      "errors": [],
+      "fit_time": 0.00701,
+      "folds_ok": "24/24",
+      "id": "agent-1-r1-c007",
+      "novelty": 0.1554,
+      "operator": "manual",
+      "parents": [
+        "agent"
+      ],
+      "performance": 17.1651,
+      "predict_time": 0.00005,
+      "quality": 0.9703,
+      "quality_std": 0.015,
+      "round": 1,
+      "score": 0.5459,
+      "status": "ok",
+      "valid": true
+    },
+    {
+      "agent": "agent-1",
+      "errors": [],
+      "fit_time": 0.0163,
+      "folds_ok": "24/24",
+      "id": "agent-1-r1-c001",
+      "novelty": 0.2251,
+      "operator": "manual",
+      "parents": [
+        "agent"
+      ],
+      "performance": 7.4168,
+      "predict_time": 0.00009,
+      "quality": 0.9708,
+      "quality_std": 0.015,
+      "round": 1,
+      "score": 0.5398,
+      "status": "ok",
+      "valid": true
+    },
+    {
+      "agent": "agent-1",
+      "errors": [],
+      "fit_time": 0.01532,
+      "folds_ok": "24/24",
+      "id": "agent-1-r1-c003",
+      "novelty": 0.1777,
+      "operator": "manual",
+      "parents": [
+        "agent"
+      ],
+      "performance": 7.891,
+      "predict_time": 0.00005,
+      "quality": 0.9704,
+      "quality_std": 0.0148,
+      "round": 1,
+      "score": 0.5226,
+      "status": "ok",
+      "valid": true
+    },
+    {
+      "agent": "agent-2",
+      "errors": [],
+      "fit_time": 0.01422,
+      "folds_ok": "24/24",
+      "id": "agent-2-r1-c004",
+      "novelty": 0.1543,
+      "operator": "manual",
+      "parents": [
+        "agent"
+      ],
+      "performance": 8.4985,
+      "predict_time": 0.00006,
+      "quality": 0.9706,
+      "quality_std": 0.0147,
+      "round": 1,
+      "score": 0.5164,
+      "status": "ok",
+      "valid": true
+    }
+  ],
+  "valid_candidates": 7
+}

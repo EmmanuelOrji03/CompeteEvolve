@@ -76,6 +76,29 @@ reward      = 1 for the top half of agents by best rank score, else 0
 
 Exponents, weights and tolerance live in `competeevolve.json`.
 
+## First result
+
+One live run on `logistic_regression` (2 agents, 1 round, 14 Gemini calls)
+produced a pure-NumPy L-BFGS softmax regression. Re-measured independently
+with 5 folds x 3 repeats:
+
+| Implementation | Accuracy | Fit time per fold |
+|---|---|---|
+| Seed (gradient descent) | 0.9525 | 137 ms |
+| scikit-learn LogisticRegression | 0.9711 | 28 ms |
+| Evolved best | 0.9730 | 12.6 ms |
+
+The code, summary and every candidate of that run are kept under
+`results/logistic_regression/`. Runs write to `runs/`, which is ignored by
+git; copy anything worth keeping into `results/`.
+
+## Rate limits
+
+The free Gemini tier allows roughly 10 requests and 250k tokens per minute.
+The default `gemini.requests_per_minute` is 5 because agent prompts are large
+and the token limit is usually hit first. A 429 is retried with the delay the
+API asks for; a few per run are normal.
+
 ## Tests
 
 ```bash

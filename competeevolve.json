@@ -24,7 +24,7 @@
   "gemini": {
     "agent_model": "gemini-3.7-flash",
     "generation_model": "gemini-3.7-flash",
-    "requests_per_minute": 8,
+    "requests_per_minute": 5,
     "max_retries": 6,
     "temperature": 0.9,
     "request_timeout_seconds": 120

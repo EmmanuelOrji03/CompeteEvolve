@@ -126,8 +126,21 @@ match this repo; Implementation, Results and Conclusion sections were empty.
 - [x] Cheap model for generation, stronger model for planning/repair, as the
       paper describes (`gemini.generation_model` vs `gemini.agent_model`; both
       default to Flash, set `agent_model` to a Pro model to use the split).
-- [ ] Live end-to-end run with a real `GEMINI_API_KEY` and a results table
-      per task (blocked on a key being available).
+- [x] Live end-to-end run with a real `GEMINI_API_KEY`. First run
+      (2026-09-05, `logistic_regression`, 2 agents, 1 round, 14 LLM calls,
+      7 candidates, all valid) produced an L-BFGS softmax implementation
+      that beats both the seed and scikit-learn. Re-measured in a fresh
+      process with 5 folds x 3 repeats:
+
+      | Implementation | Accuracy | Fit time per fold |
+      |---|---|---|
+      | Seed (gradient descent) | 0.9525 | 137 ms |
+      | scikit-learn LogisticRegression | 0.9711 | 28 ms |
+      | Evolved best | 0.9730 | 12.6 ms |
+
+      Artifacts: `results/logistic_regression/`. Still to do: `kmeans` and
+      `knn`, multi-round runs, and repeated runs with different seeds so the
+      paper can report variance.
 - [ ] Ablation runner: n competing agents vs 1 agent with n x budget vs n
       collaborating agents (shared notes). CORAL's evidence points toward
       collaboration; the paper's rivalry claim needs this test.

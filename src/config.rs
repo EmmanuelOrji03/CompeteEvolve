@@ -104,7 +104,7 @@ impl Default for GeminiConfig {
         Self {
             agent_model: "gemini-3.7-flash".into(),
             generation_model: "gemini-3.7-flash".into(),
-            requests_per_minute: 8.0,
+            requests_per_minute: 5.0,
             max_retries: 6,
             temperature: 0.9,
             request_timeout_seconds: 120,
